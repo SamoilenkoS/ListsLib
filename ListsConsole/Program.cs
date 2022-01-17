@@ -1,6 +1,5 @@
 ﻿using ListsLibrary;
 using System;
-using System.Collections.Generic;
 
 namespace ListsConsole
 {
@@ -8,14 +7,17 @@ namespace ListsConsole
     {
         static void Main(string[] args)
         {
-            ArrayList array = new ArrayList(new[] { 1, 2, 3, 4, 5 });
-            array.Add(new[] { 4, 5, 6, 7, 8, 9, 10 });
+            LinkedList<int> list =
+                new LinkedList<int>();
+            for (int i = 0; i < 10; i++)
+            {
+                list.AddFront(i);
+            }
 
-            foreach (var item in array)
+            foreach (var item in list)
             {
                 Console.Write($"{item}\t");
             }
-
             //for (int i = 0; i < ; i++)
             //{
             //    array[i] = i;
