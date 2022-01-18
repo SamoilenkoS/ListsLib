@@ -1,13 +1,15 @@
 using ListsLibrary;
 using NUnit.Framework;
+using System;
+using System.Collections.Generic;
 
 namespace ListsTests
 {
     [TestFixture(typeof(ArrayList<int>))]
-    [TestFixture(typeof(LinkedList<int>))]
-    public class Tests<T> where T : IList<int>, new()
+    [TestFixture(typeof(ListsLibrary.LinkedList<int>))]
+    public class Tests<T> where T : ListsLibrary.IList<int>, new()
     {
-        IList<int> _list;
+        ListsLibrary.IList<int> _list;
 
         [SetUp]
         public void Setup()
@@ -27,6 +29,7 @@ namespace ListsTests
         public void InitializerForArray_WhenArrayPassed_ShouldFillList
             (int[] sourceArray, int[] expectedArray)
         {
+            _list = (ListsLibrary.IList<int>)Activator.CreateInstance(typeof(T), sourceArray);
             var instance = _list.CreateInstance(sourceArray);
 
             CollectionAssert.AreEqual(expectedArray, instance);
