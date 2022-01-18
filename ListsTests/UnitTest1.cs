@@ -12,7 +12,7 @@ namespace ListsTests
         [SetUp]
         public void Setup()
         {
-             _list = new T();
+            _list = new T();
         }
 
         [Test]
@@ -23,15 +23,13 @@ namespace ListsTests
             Assert.AreEqual(10, _list[0]);
         }
 
-        [Test]
-        public void IndexerGet_WhenValidIndexInTheMiddle_ShouldReturnElement()
+        [TestCase(new[] { 1, 2, 3, 4, 5 }, new[] { 1, 2, 3, 4, 5 })]
+        public void InitializerForArray_WhenArrayPassed_ShouldFillList
+            (int[] sourceArray, int[] expectedArray)
         {
-            for (int i = 0; i < 5; i++)
-            {
-                _list.Add(i);
-            }
+            var instance = _list.CreateInstance(sourceArray);
 
-            Assert.AreEqual(3, _list[3]);
+            CollectionAssert.AreEqual(expectedArray, instance);
         }
     }
 }

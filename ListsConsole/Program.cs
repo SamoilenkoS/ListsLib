@@ -8,6 +8,9 @@ namespace ListsConsole
     {
         static void Main(string[] args)
         {
+            ListsLibrary.IList<int> list1
+                = new ListsLibrary.LinkedList<int>();
+
             Dictionary<string, string> pairs = new Dictionary<string, string>();
             pairs.Add("1", "Hello");
             pairs.Add("2", "World!");

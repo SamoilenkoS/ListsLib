@@ -45,6 +45,14 @@ namespace ListsLibrary
             Add(element);
         }
 
+        public LinkedList(IEnumerable<T> elements)
+        {
+            foreach (var item in elements)
+            {
+                Add(item);
+            }
+        }
+
         public void Add(T element)
         {
             if(_root != null)
@@ -95,7 +103,7 @@ namespace ListsLibrary
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            throw new NotImplementedException();
+            return GetEnumerator();
         }
 
         private Node<T> GetNode(int index)
@@ -108,5 +116,24 @@ namespace ListsLibrary
 
             return temp;
         }
+
+        public IList<T> CreateInstance(IEnumerable<T> items)
+        {
+            return new LinkedList<T>(items);
+        }
+
+        //public T[] ToArray()
+        //{
+        //    T[] result = new T[Count];
+        //    Node<T> temp = _root;
+        //    int i = 0;
+        //    while(temp != null)
+        //    {
+        //        result[i++] = temp.Value;
+        //        temp = temp.Next;
+        //    }
+
+        //    return result;
+        //}
     }
 }

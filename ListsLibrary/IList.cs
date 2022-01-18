@@ -10,5 +10,7 @@ namespace ListsLibrary
         int Count { get; }
         int Capacity { get; }
         T this[int index] { get; set; }
+        IList<T> CreateInstance(IEnumerable<T> items);
+        //T[] ToArray();
     }
 }

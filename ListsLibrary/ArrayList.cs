@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Text;
+using System.Linq;
 
 namespace ListsLibrary
 {
@@ -35,15 +35,17 @@ namespace ListsLibrary
             _array = new T[capacity];
         }
 
-        public ArrayList(T[] array)
+        public ArrayList(IEnumerable<T> array)
         {
-            _array = new T[(int)(array.Length * Increment)];
-            for (int i = 0; i < array.Length; i++)
+            var sourceArray = array.ToArray();
+
+            _array = new T[(int)(sourceArray.Length * Increment)];
+            for (int i = 0; i < sourceArray.Length; i++)
             {
-                _array[i] = array[i];
+                _array[i] = sourceArray[i];
             }
 
-            _currentCount = array.Length;
+            _currentCount = sourceArray.Length;
         }
 
         public void Add(T element)
@@ -109,7 +111,7 @@ namespace ListsLibrary
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            throw new NotImplementedException();
+            return GetEnumerator();
         }
 
         public override bool Equals(object obj)
@@ -143,5 +145,21 @@ namespace ListsLibrary
 
             return result;
         }
+
+        public IList<T> CreateInstance(IEnumerable<T> items)
+        {
+            return new ArrayList<T>(items);
+        }
+
+        //public T[] ToArray()
+        //{
+        //    T[] result = new T[Count];
+        //    for (int i = 0; i < Count; i++)
+        //    {
+        //        result[i] = _array[i];
+        //    }
+
+        //    return result;
+        //}
     }
 }
