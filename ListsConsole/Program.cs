@@ -9,6 +9,9 @@ namespace ListsConsole
     {
         static void Main(string[] args)
         {
+            School s = School.Instance;
+            School q = School.Instance;
+            Student t = Student.Initialize("sad", "das", DateTime.Now.Subtract(TimeSpan.FromSeconds(1)));
             WeatherGenerator weatherObserver = new WeatherGenerator();
             using (weatherObserver.Subscribe(new WeatherObserver()))
             {
