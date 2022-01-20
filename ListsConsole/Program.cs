@@ -1,6 +1,7 @@
 ﻿using ListsLibrary;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ListsConsole
 {
@@ -8,31 +9,74 @@ namespace ListsConsole
     {
         static void Main(string[] args)
         {
-            ListsLibrary.IList<int> list1
-                = new ListsLibrary.LinkedList<int>();
-
-            Dictionary<string, string> pairs = new Dictionary<string, string>();
-            pairs.Add("1", "Hello");
-            pairs.Add("2", "World!");
-            pairs.Add("10", "Blabla");
-
-            Console.WriteLine(pairs["10"]);
-            foreach (var item in pairs)
+            WeatherGenerator weatherObserver = new WeatherGenerator();
+            using (weatherObserver.Subscribe(new WeatherObserver()))
             {
-                Console.WriteLine(item);
+                weatherObserver.SimulateWeather();
             }
+            //Entity entity = new Entity
+            //{
+            //    Id = Guid.NewGuid(),
+            //    State = "New",
+            //    CreationDate = DateTime.Now
+            //};
+            //Console.WriteLine($"{entity.Id}\t{entity.State}\t{entity.CreationDate}");
 
-            ListsLibrary.LinkedList<int> list =
-                new ListsLibrary.LinkedList<int>();
-            for (int i = 0; i < 10; i++)
-            {
-                list.AddFront(i);
-            }
+            //Entity another = entity.Clone() as Entity;
+            //Console.WriteLine($"{another.Id}\t{another.State}\t{another.CreationDate}");
 
-            foreach (var item in list)
-            {
-                Console.Write($"{item}\t");
-            }
+            //HashSet<int> elements = new HashSet<int>();
+            //for (int i = 0; i < 10; i++)
+            //{
+            //    elements.Add(i);
+            //}
+
+            //elements.Add(5);
+            //foreach (var el in elements)
+            //{
+            //    Console.WriteLine(el);
+            //}
+
+
+            //var result = students.Contains(new Student
+            //    { FirstName = "Vasya", LastName = "Ivanovich" },
+            //    new StudentSurnameEqualityComparer());
+            //Console.WriteLine(result);
+            //ChildForInterface obj1 = new ChildForInterface();
+            //obj1.T();
+
+            //IInterfaceA obj2 = new ChildForInterface();
+            //obj2.T();
+
+            IInterfaceB obj3 = new ChildForInterface();
+            obj3.T();
+
+            //    ListsLibrary.IList<int> list1
+            //        = new ListsLibrary.LinkedList<int>();
+            //    List<int> items = new List<int>();
+
+            //    Dictionary<string, string> pairs = new Dictionary<string, string>();
+            //    pairs.Add("1", "Hello");
+            //    pairs.Add("2", "World!");
+            //    pairs.Add("10", "Blabla");
+
+            //    Console.WriteLine(pairs["10"]);
+            //    foreach (var item in pairs)
+            //    {
+            //        Console.WriteLine(item);
+            //    }
+
+            //    ListsLibrary.LinkedList<int> list =
+            //        new ListsLibrary.LinkedList<int>();
+            //    for (int i = 0; i < 10; i++)
+            //    {
+            //        list.AddFront(i);
+            //    }
+
+            //    foreach (var item in list)
+            //    {
+            //        Console.Write($"{item}\t");
+            //    }
             //for (int i = 0; i < ; i++)
             //{
             //    array[i] = i;

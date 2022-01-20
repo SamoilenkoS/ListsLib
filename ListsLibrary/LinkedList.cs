@@ -53,6 +53,45 @@ namespace ListsLibrary
             }
         }
 
+        public void Reverse()
+        {
+            LinkedList<T> temp = new LinkedList<T>();
+            while(_root != null)
+            {
+                temp.AddFront(_root.Value);
+                _root = _root.Next;
+            }
+
+            _root = temp._root;
+        }
+
+        public void Sort(bool ascending = true)
+        {
+            Node<T> left = GetNode(0);
+            for (int i = 0; i < Count - 1; i++)
+            {
+                Node<T> right = GetNode(i + 1);
+                for (int j = i + 1; j < Count; j++)
+                {
+                    if(left.Value.CompareTo(right.Value) == 1)
+                    {
+                        SwapValues(ref left, ref right);
+                    }
+
+                    right = right.Next;
+                }
+
+                left = left.Next;
+            }
+        }
+
+        private void SwapValues(ref Node<T> a, ref Node<T> b)
+        {
+            T temp = a.Value;
+            a.Value = b.Value;
+            b.Value = temp;
+        }
+
         public void Add(T element)
         {
             if(_root != null)

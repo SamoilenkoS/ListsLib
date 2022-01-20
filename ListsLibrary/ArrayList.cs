@@ -7,11 +7,13 @@ using System.Linq;
 namespace ListsLibrary
 {
     public class ArrayList<T>
-        : IList<T>,
-            IEquatable<IList<T>> where T : IComparable<T>
+        : IList<T>, IEquatable<IList<T>> where T : IComparable<T>
     {
+        #region Constants
         private const int DefaultSize = 4;
         private const double Increment = 1.33;
+        #endregion
+
         private int _currentCount;
         private T[] _array;
 
@@ -114,16 +116,6 @@ namespace ListsLibrary
             return GetEnumerator();
         }
 
-        public override bool Equals(object obj)
-        {
-            return Equals(obj as IList);
-        }
-
-        public override int GetHashCode()
-        {
-            return base.GetHashCode();
-        }
-
         public bool Equals([AllowNull] IList<T> list)
         {
             bool result = true;
@@ -151,15 +143,17 @@ namespace ListsLibrary
             return new ArrayList<T>(items);
         }
 
-        //public T[] ToArray()
-        //{
-        //    T[] result = new T[Count];
-        //    for (int i = 0; i < Count; i++)
-        //    {
-        //        result[i] = _array[i];
-        //    }
+        #region Equals
+        public override bool Equals(object obj)
+        {
+            return Equals(obj as IList);
+        }
 
-        //    return result;
-        //}
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
+        #endregion
     }
 }
