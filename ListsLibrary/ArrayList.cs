@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Text;
 
 namespace ListsLibrary
@@ -44,6 +45,20 @@ namespace ListsLibrary
             }
 
             _currentCount = array.Length;
+        }
+
+        public ArrayList(IEnumerable<T> items)
+        {
+            var itemsCount = items.Count();
+            _array = new T[itemsCount];
+            int i = 0;
+
+            foreach (var item in items)
+            {
+                _array[i++] = item;
+            }
+
+            _currentCount = itemsCount;
         }
 
         public void Add(T element)
@@ -109,7 +124,7 @@ namespace ListsLibrary
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            throw new NotImplementedException();
+            return GetEnumerator();
         }
 
         public override bool Equals(object obj)
@@ -142,6 +157,38 @@ namespace ListsLibrary
             }
 
             return result;
+        }
+
+        public void AddByIndex(int index, IEnumerable<T> items)
+        {
+            int itemsCount = items.Count();
+            if(index < 0 || index > Count)
+            {
+                throw new ArgumentException();
+            }
+
+            int newSize = Count + itemsCount;
+            if (newSize >= Capacity)
+            {
+                Resize(newSize);
+            }
+
+            for (int i = Count - 1; i >= index; i--)
+            {
+                _array[i + itemsCount] = _array[i];
+            }
+
+            foreach (var item in items)
+            {
+                _array[index++] = item;
+            }
+
+            _currentCount += itemsCount;
+        }
+
+        public IList<T> Initialize(IEnumerable<T> items)
+        {
+            return new ArrayList<T>(items);
         }
     }
 }
